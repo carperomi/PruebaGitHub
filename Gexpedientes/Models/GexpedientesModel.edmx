@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GestionDeExpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BIT_DOC_ESTADO">
+          <Key>
+            <PropertyRef Name="BIT_ID" />
+          </Key>
+          <Property Name="BIT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+          <Property Name="FECHA_CREA" Type="date" />
+          <Property Name="ARCHIVO_CORRELATIVO" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO_ANT" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO_ACT" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="BUZON">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+            <PropertyRef Name="ARCHIVO_ID" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ARCHIVO_ID" Type="int" Nullable="false" />
+          <Property Name="DE" Type="int" />
+          <Property Name="PARA" Type="int" />
+          <Property Name="FECHA_CREA" Type="date" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="DEPARTAMENTO_ID" />
+          </Key>
+          <Property Name="DEPARTAMENTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DEPARTAMENTO_NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="DEPARTAMENTO_ESTADO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DOCUMENTO">
+          <Key>
+            <PropertyRef Name="ARCHIVO_ID" />
+          </Key>
+          <Property Name="ARCHIVO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ARCHIVO_USUARIO" Type="varchar" MaxLength="50" />
+          <Property Name="DEPARTAMENTO" Type="int" />
+          <Property Name="INSTITUCION" Type="int" />
+          <Property Name="ARCHIVO_TIPO_ID" Type="int" />
+          <Property Name="ARCHIVO_FECHA_DOCUMENTO" Type="date" />
+          <Property Name="ARCHIVO_CORRELATIVO" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_ASUNTO" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_ANEXO_RUTA" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_OBSERVACIONES" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_FECHA_CREA" Type="date" />
+          <Property Name="ESTADO_ID" Type="int" Nullable="false" />
+          <Property Name="TIPO_ID" Type="int" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ID" Type="int" Nullable="false" />
+          <Property Name="INSTITUCION_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ESTADO_ID" />
+          </Key>
+          <Property Name="ESTADO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ESTADO_NOMBRE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EXPEDIENTE">
+          <Key>
+            <PropertyRef Name="EXPEDIENTE_ID" />
+          </Key>
+          <Property Name="EXPEDIENTE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECH_CREA" Type="date" />
+          <Property Name="USUARIO_CREA" Type="varchar" MaxLength="50" />
+          <Property Name="ARCHIVO_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSTITUCION">
+          <Key>
+            <PropertyRef Name="INSTITUCION_ID" />
+          </Key>
+          <Property Name="INSTITUCION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTITUCION_NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="INSTITUCION_ABREVIATURA" Type="varchar" MaxLength="50" />
+          <Property Name="INSTITUCION_DIRECCION" Type="varchar" MaxLength="50" />
+          <Property Name="INSTITUCION_TELEFONO" Type="varchar" MaxLength="50" />
+          <Property Name="INSTITUCION_WEB" Type="varchar" MaxLength="50" />
+          <Property Name="INSTITUCION_ESTATUS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PERMISO">
+          <Key>
+            <PropertyRef Name="PERMISO_ID" />
+          </Key>
+          <Property Name="PERMISO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERMISO_DESCRIPCION" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL_NOMBRE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ROL_PERMISO">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+            <PropertyRef Name="ROL_ID" />
+            <PropertyRef Name="PERMISO_ID" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL_ID" Type="int" Nullable="false" />
+          <Property Name="PERMISO_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_ARCHIVO">
+          <Key>
+            <PropertyRef Name="TIPO_ID" />
+          </Key>
+          <Property Name="TIPO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_NOMBRE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="USUARIO_ID" />
+          </Key>
+          <Property Name="USUARIO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO_FECHA_CREA" Type="date" />
+          <Property Name="USUARIO_CODIGO" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_NICK" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_PASSWORD" Type="varchar" MaxLength="50" />
+          <Property Name="ROL_ID" Type="int" />
+          <Property Name="USUARIO_EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_NOMBRE1" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_NOMBRE2" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_APELLIDO1" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_APELLIDO2" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_DEPARTAMENTO" Type="int" />
+          <Property Name="TITULO" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_PUESTO" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO_STATUS" Type="int" />
+          <Property Name="ESTADO_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="RefDEPARTAMENTO201">
+          <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefDOCUMENTO231">
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
+          <End Role="EXPEDIENTE" Type="Self.EXPEDIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENTO">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Principal>
+            <Dependent Role="EXPEDIENTE">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefDOCUMENTO241">
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
+          <End Role="BUZON" Type="Self.BUZON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENTO">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Principal>
+            <Dependent Role="BUZON">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefESTADO11">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefESTADO21">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefINSTITUCION211">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="INSTITUCION_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="INSTITUCION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefPERMISO151">
+          <End Role="PERMISO" Type="Self.PERMISO" Multiplicity="1" />
+          <End Role="ROL_PERMISO" Type="Self.ROL_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISO">
+              <PropertyRef Name="PERMISO_ID" />
+            </Principal>
+            <Dependent Role="ROL_PERMISO">
+              <PropertyRef Name="PERMISO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefROL141">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="ROL_PERMISO" Type="Self.ROL_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="ROL_PERMISO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefROL161">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefTIPO_ARCHIVO181">
+          <End Role="TIPO_ARCHIVO" Type="Self.TIPO_ARCHIVO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ARCHIVO">
+              <PropertyRef Name="TIPO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="TIPO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionDeExpModelStoreContainer">
+          <EntitySet Name="BIT_DOC_ESTADO" EntityType="Self.BIT_DOC_ESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BUZON" EntityType="Self.BUZON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTO" EntityType="Self.DOCUMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPEDIENTE" EntityType="Self.EXPEDIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSTITUCION" EntityType="Self.INSTITUCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISO" EntityType="Self.PERMISO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL_PERMISO" EntityType="Self.ROL_PERMISO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_ARCHIVO" EntityType="Self.TIPO_ARCHIVO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="RefDEPARTAMENTO201" Association="Self.RefDEPARTAMENTO201">
+            <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefDOCUMENTO231" Association="Self.RefDOCUMENTO231">
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+            <End Role="EXPEDIENTE" EntitySet="EXPEDIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="RefDOCUMENTO241" Association="Self.RefDOCUMENTO241">
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+            <End Role="BUZON" EntitySet="BUZON" />
+          </AssociationSet>
+          <AssociationSet Name="RefESTADO11" Association="Self.RefESTADO11">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="RefESTADO21" Association="Self.RefESTADO21">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefINSTITUCION211" Association="Self.RefINSTITUCION211">
+            <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefPERMISO151" Association="Self.RefPERMISO151">
+            <End Role="PERMISO" EntitySet="PERMISO" />
+            <End Role="ROL_PERMISO" EntitySet="ROL_PERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="RefROL141" Association="Self.RefROL141">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="ROL_PERMISO" EntitySet="ROL_PERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="RefROL161" Association="Self.RefROL161">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="RefTIPO_ARCHIVO181" Association="Self.RefTIPO_ARCHIVO181">
+            <End Role="TIPO_ARCHIVO" EntitySet="TIPO_ARCHIVO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionDeExpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BIT_DOC_ESTADO">
+          <Key>
+            <PropertyRef Name="BIT_ID" />
+          </Key>
+          <Property Name="BIT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CREA" Type="DateTime" Precision="0" />
+          <Property Name="ARCHIVO_CORRELATIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO_ANT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO_ACT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="BUZON">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+            <PropertyRef Name="ARCHIVO_ID" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ARCHIVO_ID" Type="Int32" Nullable="false" />
+          <Property Name="DE" Type="Int32" />
+          <Property Name="PARA" Type="Int32" />
+          <Property Name="FECHA_CREA" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefDOCUMENTO241" FromRole="BUZON" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="DEPARTAMENTO_ID" />
+          </Key>
+          <Property Name="DEPARTAMENTO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DEPARTAMENTO_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefDEPARTAMENTO201" FromRole="DEPARTAMENTO" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="DOCUMENTO">
+          <Key>
+            <PropertyRef Name="ARCHIVO_ID" />
+          </Key>
+          <Property Name="ARCHIVO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ARCHIVO_USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO" Type="Int32" />
+          <Property Name="INSTITUCION" Type="Int32" />
+          <Property Name="ARCHIVO_TIPO_ID" Type="Int32" />
+          <Property Name="ARCHIVO_FECHA_DOCUMENTO" Type="DateTime" Precision="0" />
+          <Property Name="ARCHIVO_CORRELATIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_ASUNTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_ANEXO_RUTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_OBSERVACIONES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_FECHA_CREA" Type="DateTime" Precision="0" />
+          <Property Name="ESTADO_ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO_ID" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="INSTITUCION_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BUZON" Relationship="Self.RefDOCUMENTO241" FromRole="DOCUMENTO" ToRole="BUZON" />
+          <NavigationProperty Name="DEPARTAMENTO1" Relationship="Self.RefDEPARTAMENTO201" FromRole="DOCUMENTO" ToRole="DEPARTAMENTO" />
+          <NavigationProperty Name="EXPEDIENTE" Relationship="Self.RefDOCUMENTO231" FromRole="DOCUMENTO" ToRole="EXPEDIENTE" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.RefESTADO21" FromRole="DOCUMENTO" ToRole="ESTADO" />
+          <NavigationProperty Name="INSTITUCION1" Relationship="Self.RefINSTITUCION211" FromRole="DOCUMENTO" ToRole="INSTITUCION" />
+          <NavigationProperty Name="TIPO_ARCHIVO" Relationship="Self.RefTIPO_ARCHIVO181" FromRole="DOCUMENTO" ToRole="TIPO_ARCHIVO" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ESTADO_ID" />
+          </Key>
+          <Property Name="ESTADO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ESTADO_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefESTADO21" FromRole="ESTADO" ToRole="DOCUMENTO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.RefESTADO11" FromRole="ESTADO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="EXPEDIENTE">
+          <Key>
+            <PropertyRef Name="EXPEDIENTE_ID" />
+          </Key>
+          <Property Name="EXPEDIENTE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECH_CREA" Type="DateTime" Precision="0" />
+          <Property Name="USUARIO_CREA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefDOCUMENTO231" FromRole="EXPEDIENTE" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="INSTITUCION">
+          <Key>
+            <PropertyRef Name="INSTITUCION_ID" />
+          </Key>
+          <Property Name="INSTITUCION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTITUCION_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCION_ABREVIATURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCION_DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCION_TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCION_WEB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCION_ESTATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefINSTITUCION211" FromRole="INSTITUCION" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="PERMISO">
+          <Key>
+            <PropertyRef Name="PERMISO_ID" />
+          </Key>
+          <Property Name="PERMISO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERMISO_DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ROL_PERMISO" Relationship="Self.RefPERMISO151" FromRole="PERMISO" ToRole="ROL_PERMISO" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ROL_PERMISO" Relationship="Self.RefROL141" FromRole="ROL" ToRole="ROL_PERMISO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.RefROL161" FromRole="ROL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ROL_PERMISO">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+            <PropertyRef Name="ROL_ID" />
+            <PropertyRef Name="PERMISO_ID" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL_ID" Type="Int32" Nullable="false" />
+          <Property Name="PERMISO_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERMISO" Relationship="Self.RefPERMISO151" FromRole="ROL_PERMISO" ToRole="PERMISO" />
+          <NavigationProperty Name="ROL" Relationship="Self.RefROL141" FromRole="ROL_PERMISO" ToRole="ROL" />
+        </EntityType>
+        <EntityType Name="TIPO_ARCHIVO">
+          <Key>
+            <PropertyRef Name="TIPO_ID" />
+          </Key>
+          <Property Name="TIPO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DOCUMENTO" Relationship="Self.RefTIPO_ARCHIVO181" FromRole="TIPO_ARCHIVO" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="USUARIO_ID" />
+          </Key>
+          <Property Name="USUARIO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO_FECHA_CREA" Type="DateTime" Precision="0" />
+          <Property Name="USUARIO_CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_NICK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ROL_ID" Type="Int32" />
+          <Property Name="USUARIO_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_NOMBRE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_NOMBRE2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_APELLIDO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_APELLIDO2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_DEPARTAMENTO" Type="Int32" />
+          <Property Name="TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_PUESTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_STATUS" Type="Int32" />
+          <Property Name="ESTADO_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.RefESTADO11" FromRole="USUARIO" ToRole="ESTADO" />
+          <NavigationProperty Name="ROL" Relationship="Self.RefROL161" FromRole="USUARIO" ToRole="ROL" />
+        </EntityType>
+        <Association Name="RefDOCUMENTO241">
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
+          <End Role="BUZON" Type="Self.BUZON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENTO">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Principal>
+            <Dependent Role="BUZON">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefDEPARTAMENTO201">
+          <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefDOCUMENTO231">
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
+          <End Role="EXPEDIENTE" Type="Self.EXPEDIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENTO">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Principal>
+            <Dependent Role="EXPEDIENTE">
+              <PropertyRef Name="ARCHIVO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefESTADO21">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefINSTITUCION211">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="INSTITUCION_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="INSTITUCION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefTIPO_ARCHIVO181">
+          <End Role="TIPO_ARCHIVO" Type="Self.TIPO_ARCHIVO" Multiplicity="1" />
+          <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ARCHIVO">
+              <PropertyRef Name="TIPO_ID" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="TIPO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefESTADO11">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ESTADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefPERMISO151">
+          <End Role="PERMISO" Type="Self.PERMISO" Multiplicity="1" />
+          <End Role="ROL_PERMISO" Type="Self.ROL_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISO">
+              <PropertyRef Name="PERMISO_ID" />
+            </Principal>
+            <Dependent Role="ROL_PERMISO">
+              <PropertyRef Name="PERMISO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefROL141">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="ROL_PERMISO" Type="Self.ROL_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="ROL_PERMISO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefROL161">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionDeExpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BIT_DOC_ESTADO" EntityType="Self.BIT_DOC_ESTADO" />
+          <EntitySet Name="BUZON" EntityType="Self.BUZON" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" />
+          <EntitySet Name="DOCUMENTO" EntityType="Self.DOCUMENTO" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+          <EntitySet Name="EXPEDIENTE" EntityType="Self.EXPEDIENTE" />
+          <EntitySet Name="INSTITUCION" EntityType="Self.INSTITUCION" />
+          <EntitySet Name="PERMISO" EntityType="Self.PERMISO" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <EntitySet Name="ROL_PERMISO" EntityType="Self.ROL_PERMISO" />
+          <EntitySet Name="TIPO_ARCHIVO" EntityType="Self.TIPO_ARCHIVO" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="RefDOCUMENTO241" Association="Self.RefDOCUMENTO241">
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+            <End Role="BUZON" EntitySet="BUZON" />
+          </AssociationSet>
+          <AssociationSet Name="RefDEPARTAMENTO201" Association="Self.RefDEPARTAMENTO201">
+            <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefDOCUMENTO231" Association="Self.RefDOCUMENTO231">
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+            <End Role="EXPEDIENTE" EntitySet="EXPEDIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="RefESTADO21" Association="Self.RefESTADO21">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefINSTITUCION211" Association="Self.RefINSTITUCION211">
+            <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefTIPO_ARCHIVO181" Association="Self.RefTIPO_ARCHIVO181">
+            <End Role="TIPO_ARCHIVO" EntitySet="TIPO_ARCHIVO" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="RefESTADO11" Association="Self.RefESTADO11">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="RefPERMISO151" Association="Self.RefPERMISO151">
+            <End Role="PERMISO" EntitySet="PERMISO" />
+            <End Role="ROL_PERMISO" EntitySet="ROL_PERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="RefROL141" Association="Self.RefROL141">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="ROL_PERMISO" EntitySet="ROL_PERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="RefROL161" Association="Self.RefROL161">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionDeExpModelStoreContainer" CdmEntityContainer="GestionDeExpEntities">
+          <EntitySetMapping Name="BIT_DOC_ESTADO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.BIT_DOC_ESTADO">
+              <MappingFragment StoreEntitySet="BIT_DOC_ESTADO">
+                <ScalarProperty Name="BIT_ID" ColumnName="BIT_ID" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_CREA" ColumnName="FECHA_CREA" />
+                <ScalarProperty Name="ARCHIVO_CORRELATIVO" ColumnName="ARCHIVO_CORRELATIVO" />
+                <ScalarProperty Name="ESTADO_ANT" ColumnName="ESTADO_ANT" />
+                <ScalarProperty Name="ESTADO_ACT" ColumnName="ESTADO_ACT" />
+                <ScalarProperty Name="ARCHIVO_ID" ColumnName="ARCHIVO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUZON">
+            <EntityTypeMapping TypeName="GestionDeExpModel.BUZON">
+              <MappingFragment StoreEntitySet="BUZON">
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="ARCHIVO_ID" ColumnName="ARCHIVO_ID" />
+                <ScalarProperty Name="DE" ColumnName="DE" />
+                <ScalarProperty Name="PARA" ColumnName="PARA" />
+                <ScalarProperty Name="FECHA_CREA" ColumnName="FECHA_CREA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTAMENTO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.DEPARTAMENTO">
+              <MappingFragment StoreEntitySet="DEPARTAMENTO">
+                <ScalarProperty Name="DEPARTAMENTO_ID" ColumnName="DEPARTAMENTO_ID" />
+                <ScalarProperty Name="DEPARTAMENTO_NOMBRE" ColumnName="DEPARTAMENTO_NOMBRE" />
+                <ScalarProperty Name="DEPARTAMENTO_ESTADO" ColumnName="DEPARTAMENTO_ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.DOCUMENTO">
+              <MappingFragment StoreEntitySet="DOCUMENTO">
+                <ScalarProperty Name="ARCHIVO_ID" ColumnName="ARCHIVO_ID" />
+                <ScalarProperty Name="ARCHIVO_USUARIO" ColumnName="ARCHIVO_USUARIO" />
+                <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />
+                <ScalarProperty Name="INSTITUCION" ColumnName="INSTITUCION" />
+                <ScalarProperty Name="ARCHIVO_TIPO_ID" ColumnName="ARCHIVO_TIPO_ID" />
+                <ScalarProperty Name="ARCHIVO_FECHA_DOCUMENTO" ColumnName="ARCHIVO_FECHA_DOCUMENTO" />
+                <ScalarProperty Name="ARCHIVO_CORRELATIVO" ColumnName="ARCHIVO_CORRELATIVO" />
+                <ScalarProperty Name="ARCHIVO_ASUNTO" ColumnName="ARCHIVO_ASUNTO" />
+                <ScalarProperty Name="ARCHIVO_ANEXO_RUTA" ColumnName="ARCHIVO_ANEXO_RUTA" />
+                <ScalarProperty Name="ARCHIVO_OBSERVACIONES" ColumnName="ARCHIVO_OBSERVACIONES" />
+                <ScalarProperty Name="ARCHIVO_FECHA_CREA" ColumnName="ARCHIVO_FECHA_CREA" />
+                <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
+                <ScalarProperty Name="TIPO_ID" ColumnName="TIPO_ID" />
+                <ScalarProperty Name="DEPARTAMENTO_ID" ColumnName="DEPARTAMENTO_ID" />
+                <ScalarProperty Name="INSTITUCION_ID" ColumnName="INSTITUCION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.ESTADO">
+              <MappingFragment StoreEntitySet="ESTADO">
+                <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
+                <ScalarProperty Name="ESTADO_NOMBRE" ColumnName="ESTADO_NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXPEDIENTE">
+            <EntityTypeMapping TypeName="GestionDeExpModel.EXPEDIENTE">
+              <MappingFragment StoreEntitySet="EXPEDIENTE">
+                <ScalarProperty Name="EXPEDIENTE_ID" ColumnName="EXPEDIENTE_ID" />
+                <ScalarProperty Name="FECH_CREA" ColumnName="FECH_CREA" />
+                <ScalarProperty Name="USUARIO_CREA" ColumnName="USUARIO_CREA" />
+                <ScalarProperty Name="ARCHIVO_ID" ColumnName="ARCHIVO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTITUCION">
+            <EntityTypeMapping TypeName="GestionDeExpModel.INSTITUCION">
+              <MappingFragment StoreEntitySet="INSTITUCION">
+                <ScalarProperty Name="INSTITUCION_ID" ColumnName="INSTITUCION_ID" />
+                <ScalarProperty Name="INSTITUCION_NOMBRE" ColumnName="INSTITUCION_NOMBRE" />
+                <ScalarProperty Name="INSTITUCION_ABREVIATURA" ColumnName="INSTITUCION_ABREVIATURA" />
+                <ScalarProperty Name="INSTITUCION_DIRECCION" ColumnName="INSTITUCION_DIRECCION" />
+                <ScalarProperty Name="INSTITUCION_TELEFONO" ColumnName="INSTITUCION_TELEFONO" />
+                <ScalarProperty Name="INSTITUCION_WEB" ColumnName="INSTITUCION_WEB" />
+                <ScalarProperty Name="INSTITUCION_ESTATUS" ColumnName="INSTITUCION_ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.PERMISO">
+              <MappingFragment StoreEntitySet="PERMISO">
+                <ScalarProperty Name="PERMISO_ID" ColumnName="PERMISO_ID" />
+                <ScalarProperty Name="PERMISO_DESCRIPCION" ColumnName="PERMISO_DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="GestionDeExpModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="ROL_NOMBRE" ColumnName="ROL_NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL_PERMISO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.ROL_PERMISO">
+              <MappingFragment StoreEntitySet="ROL_PERMISO">
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="PERMISO_ID" ColumnName="PERMISO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_ARCHIVO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.TIPO_ARCHIVO">
+              <MappingFragment StoreEntitySet="TIPO_ARCHIVO">
+                <ScalarProperty Name="TIPO_ID" ColumnName="TIPO_ID" />
+                <ScalarProperty Name="TIPO_NOMBRE" ColumnName="TIPO_NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="GestionDeExpModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="USUARIO_FECHA_CREA" ColumnName="USUARIO_FECHA_CREA" />
+                <ScalarProperty Name="USUARIO_CODIGO" ColumnName="USUARIO_CODIGO" />
+                <ScalarProperty Name="USUARIO_NICK" ColumnName="USUARIO_NICK" />
+                <ScalarProperty Name="USUARIO_PASSWORD" ColumnName="USUARIO_PASSWORD" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="USUARIO_EMAIL" ColumnName="USUARIO_EMAIL" />
+                <ScalarProperty Name="USUARIO_NOMBRE1" ColumnName="USUARIO_NOMBRE1" />
+                <ScalarProperty Name="USUARIO_NOMBRE2" ColumnName="USUARIO_NOMBRE2" />
+                <ScalarProperty Name="USUARIO_APELLIDO1" ColumnName="USUARIO_APELLIDO1" />
+                <ScalarProperty Name="USUARIO_APELLIDO2" ColumnName="USUARIO_APELLIDO2" />
+                <ScalarProperty Name="USUARIO_DEPARTAMENTO" ColumnName="USUARIO_DEPARTAMENTO" />
+                <ScalarProperty Name="TITULO" ColumnName="TITULO" />
+                <ScalarProperty Name="USUARIO_PUESTO" ColumnName="USUARIO_PUESTO" />
+                <ScalarProperty Name="USUARIO_STATUS" ColumnName="USUARIO_STATUS" />
+                <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
